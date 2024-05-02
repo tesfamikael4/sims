@@ -31,6 +31,35 @@
 ```bash
 $ npm install
 ```
+## Database Connection
+inside the srs/app.module.ts change your own db configuration default one is 
+for postgresql
+
+    TypeOrmModule.forRootAsync({ useFactory: () => ({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'root',
+      database: 'sims',
+      entities: ['dist/**/*.entity{.ts,.js}'],
+      synchronize: true,
+      autoLoadEntities: true
+    }) 
+  }),
+  for mysql
+    TypeOrmModule.forRootAsync({ useFactory: () => ({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'root',
+      database: 'sims',
+      entities: ['dist/**/*.entity{.ts,.js}'],
+      synchronize: true,
+      autoLoadEntities: true
+    }) 
+  }),
 
 ## Running the app
 
@@ -59,15 +88,8 @@ $ npm run test:cov
 ```
 
 ## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
+michaelwondemu195@gmail.com
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Michael Wondemu](https://www.linkedin.com/in/michael-wondemu-2a3849199/)
 
-## License
-
-Nest is [MIT licensed](LICENSE).

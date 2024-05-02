@@ -8,9 +8,9 @@
 ```bash
 $ npm install
 ```
-## Database Connection
-inside the srs/app.module.ts change your own db configuration default one is 
-for postgresql
+## Database Connection for PostgresQL
+inside the srs/app.module.ts change your own db configuration 
+
 
     TypeOrmModule.forRootAsync({ useFactory: () => ({
       type: 'postgres',
@@ -25,8 +25,7 @@ for postgresql
     }) 
   }),
 
-  
-  for mysql
+  ## Database Connection MySQL
     TypeOrmModule.forRootAsync({ useFactory: () => ({
       type: 'mysql',
       host: 'localhost',

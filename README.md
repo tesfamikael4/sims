@@ -23,7 +23,6 @@ inside the srs/app.module.ts change your own db configuration
       synchronize: true,
       autoLoadEntities: true
     }) 
-  }),
 
   ## Database Connection MySQL
     TypeOrmModule.forRootAsync({ useFactory: () => ({
@@ -37,7 +36,6 @@ inside the srs/app.module.ts change your own db configuration
       synchronize: true,
       autoLoadEntities: true
     }) 
-  }),
 
 ## Running the app
 

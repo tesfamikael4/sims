@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { CreateDepartmentDto, UpdateDepartmentDto } from './dto/department.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Department } from './entities/department.entity';
@@ -11,7 +11,18 @@ export class DepartmentsService {
     @InjectRepository(Department)
     private readonly departmentRepository: Repository<Department>,
   ) {}
+
   async create(createDepartmentDto: CreateDepartmentDto) {
+    const existingDepartmentName = await this.findByName(createDepartmentDto.name);
+    if (existingDepartmentName) {
+      throw new ConflictException(`Department with name ${createDepartmentDto.name} already exists`);
+    }
+
+    const existingDepartmentSName = await this.findByShortName(createDepartmentDto.shortName);
+    if (existingDepartmentSName) {
+      throw new ConflictException(`Department with short name ${createDepartmentDto.shortName} already exists`);
+    }
+
     const department = this.departmentRepository.create(createDepartmentDto);
     await this.departmentRepository.save(department);
 
@@ -66,5 +77,16 @@ export class DepartmentsService {
       throw new NotFoundException(`not_found`);
     }
     return department;
+  }
+
+  private async findByName(name: string): Promise<Department | undefined> {
+    return await this.departmentRepository.findOne({
+      where: { name },
+    });
+  }
+  private async findByShortName(shortName: string): Promise<Department | undefined> {
+    return await this.departmentRepository.findOne({
+      where:  { shortName },
+    });
   }
 }

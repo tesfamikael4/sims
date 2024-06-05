@@ -1,5 +1,6 @@
 import { Department } from 'src/departments/entities/department.entity';
-import { CommonEntity, StudentStatus } from 'src/shared';
+import { Region } from 'src/region/entities/region.entity';
+import { CasedStatus, CommonEntity, StudentStatus } from 'src/shared';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -14,19 +15,48 @@ export class Student extends CommonEntity {
   id: string;
 
   @Column()
-  departmentId: string;
+  currentDepartmentId: string;
 
   @Column()
-  name: string;
+  firstName: string;
 
   @Column()
-  idNumber: string;
+  middleName: string;
 
-  @Column({ nullable: true })
-  phone: string;
+  @Column()
+  lastName: string;
 
-  @Column({ nullable: true })
-  sex: string;
+  @Column()
+  studentUniversityId: string;
+
+  @Column({ nullable: false })
+  universityEntrance: number;
+
+  @Column()
+  cgpa: number;
+
+  @Column({ default: 0 })
+  fieldEntrance: number;
+
+  @Column()
+  gender: string;
+
+  @Column()
+  regionId: string;
+
+  @Column({
+    type: 'enum',
+    enum: CasedStatus,
+    default: CasedStatus.No,
+  })
+  handCaped: string;
+
+  @Column({
+    type: 'enum',
+    enum: CasedStatus,
+    default: CasedStatus.No,
+  })
+  specialCased: string;
 
   @Column({
     type: 'enum',
@@ -36,6 +66,10 @@ export class Student extends CommonEntity {
   status: string;
 
   @ManyToOne(() => Department, (department) => department.students)
-  @JoinColumn({ name: 'departmentId' })
+  @JoinColumn({ name: 'currentDepartmentId' })
   department: Department;
+
+  @ManyToOne(() => Region, (region) => region.students)
+  @JoinColumn({ name: 'regionId' })
+  region: Region;
 }

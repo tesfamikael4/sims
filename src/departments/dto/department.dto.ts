@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsNotEmpty, IsEnum, IsUUID, IsString } from 'class-validator';
-import { StudentStatus } from 'src/shared';
+import { IsNotEmpty, IsEnum, IsUUID, IsString, IsNumber } from 'class-validator';
+import { DepartmentStatus } from 'src/shared';
 
 export class CreateDepartmentDto {
   @ApiProperty()
@@ -8,8 +8,18 @@ export class CreateDepartmentDto {
   @IsString()
   name: string;
 
-  @ApiProperty({ enum: StudentStatus })
-  @IsEnum(StudentStatus)
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  shortName: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  intakeCapacity: number;
+
+  @ApiProperty({ enum: DepartmentStatus })
+  @IsEnum(DepartmentStatus)
   status: string;
 }
 

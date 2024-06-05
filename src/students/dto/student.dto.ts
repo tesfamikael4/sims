@@ -2,29 +2,58 @@
 
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsEnum, IsUUID } from 'class-validator';
-import { StudentStatus } from 'src/shared';
+import { CasedStatus, StudentStatus } from 'src/shared';
 
 export class CreateStudentDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsUUID()
-  departmentId: string;
+  currentDepartmentId: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  name: string;
+  @IsUUID()
+  regionId: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  idNumber: string;
+  firstName: string;
+  
+  @ApiProperty()
+  @IsNotEmpty()
+  lastName: string;
+  
+  @ApiProperty()
+  @IsNotEmpty()
+  middleName: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  studentUniversityId: string;
 
   @ApiProperty()
   @IsOptional()
-  phone: string;
+  cgpa: number;
 
   @ApiProperty()
   @IsOptional()
-  sex: string;
+  universityEntrance: number;
+
+  @ApiProperty()
+  @IsOptional()
+  fieldEntrance: number;
+
+  @ApiProperty()
+  @IsOptional()
+  gender: string;
+
+  @ApiProperty({ enum: CasedStatus })
+  @IsEnum(CasedStatus)
+  handCaped: string;
+
+  @ApiProperty({ enum: CasedStatus })
+  @IsEnum(CasedStatus)
+  specialCased: string;
 
   @ApiProperty({ enum: StudentStatus })
   @IsEnum(StudentStatus)

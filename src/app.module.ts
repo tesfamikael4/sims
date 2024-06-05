@@ -1,7 +1,8 @@
-/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { StudentsModule } from './students/students.module';
 import { DepartmentsModule } from './departments/departments.module';
+import { HierarchyModule } from './hierarchy/hierarchy.module';
+import { RegionModule } from './region/region.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -20,8 +21,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   }),
     StudentsModule,
     DepartmentsModule,
-  ],
-  controllers: [],
-  providers: [],
+    HierarchyModule,
+    RegionModule
+  ]
 })
 export class AppModule {}

@@ -44,6 +44,12 @@ export class Student extends CommonEntity {
   @Column()
   regionId: string;
 
+  @Column()
+  batch: number;
+
+  @Column()
+  semester: number;
+
   @Column({
     type: 'enum',
     enum: CasedStatus,
@@ -62,6 +68,7 @@ export class Student extends CommonEntity {
     type: 'enum',
     enum: StudentStatus,
     default: StudentStatus.Active,
+    nullable: true
   })
   status: string;
 

@@ -47,6 +47,14 @@ export class CreateStudentDto {
   @IsOptional()
   gender: string;
 
+  @ApiProperty()
+  @IsOptional()
+  batch: number;
+
+  @ApiProperty()
+  @IsOptional()
+  semester: number;
+
   @ApiProperty({ enum: CasedStatus })
   @IsEnum(CasedStatus)
   handCaped: string;
@@ -56,6 +64,7 @@ export class CreateStudentDto {
   specialCased: string;
 
   @ApiProperty({ enum: StudentStatus })
+  @IsOptional()
   @IsEnum(StudentStatus)
   status: string;
 }

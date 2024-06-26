@@ -12,6 +12,13 @@ export enum StudentStatus {
   NotFilled = "Not_Filled"
 }
 
+export enum UserRole {
+  Admin = 'Admin',
+  Dean = 'Dean',
+  Department = 'Department',
+  Registrar = 'Registrar',
+  Student = "Student"
+}
 
 export enum CasedStatus {
   Yes = 'Yes',

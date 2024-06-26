@@ -7,10 +7,16 @@ import {
   Param,
   Delete,
   Query,
+  UseInterceptors,
+  UploadedFile,
+  HttpStatus,
+  HttpException,
 } from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { CreateStudentDto, UpdateStudentDto } from './dto/student.dto';
 import { ApiQuery } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ImportStudentsDto } from './dto/import-student.dto';
 
 @Controller('students')
 export class StudentsController {
@@ -21,6 +27,16 @@ export class StudentsController {
     return this.studentsService.create(createStudentDto);
   }
 
+  @Post('import')
+  @UseInterceptors(FileInterceptor('file'))
+  async importStudents(@Body() importDto: ImportStudentsDto, @UploadedFile() file: Express.Multer.File) {
+    if (!file) {
+      throw new HttpException('File is required', HttpStatus.BAD_REQUEST);
+    }
+
+    const fileBuffer = file.buffer;
+    return await this.studentsService.importStudents(importDto, fileBuffer);
+  }
   @Get()
   @ApiQuery({
     name: 'includes',
